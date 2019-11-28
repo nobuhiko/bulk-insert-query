@@ -3,7 +3,7 @@
  * @see https://gist.github.com/gskema/a182aaf7cc04001aebba9c1aad86b40b
  */
 
-namespace nobuhiko\Util;
+namespace nobuhiko\BulkInsertQuery;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Identifier;
