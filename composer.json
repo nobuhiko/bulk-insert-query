@@ -1,0 +1,19 @@
+{
+    "name": "nobuhiko/bulk-insert-query",
+    "description": "Doctrine DBAL BulkInsertQuery",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "のぶ",
+            "email": "nobuhiko.kimoto@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "nobuhiko\\BulkInsertQuery\\": "src/Util/"
+        }
+    },
+    "require": {}
+}

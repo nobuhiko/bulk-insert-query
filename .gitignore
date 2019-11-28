@@ -1,0 +1,7 @@
+/vendor
+.env
+
+vi logs/.gitignore
+
+*
+!.gitignore
