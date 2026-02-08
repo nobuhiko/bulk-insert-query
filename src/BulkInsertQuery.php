@@ -86,7 +86,9 @@ class BulkInsertQuery
 
         $parameters = [];
         foreach ($this->valueSets as $valueSet) {
-            $parameters = array_merge($parameters, array_values($valueSet));
+            foreach (array_values($valueSet) as $v) {
+                $parameters[] = $v;
+            }
         }
 
         $this->connection->executeQuery($sql, $parameters, $this->getPositionalTypes());
@@ -166,8 +168,10 @@ class BulkInsertQuery
         $repeat = count($this->valueSets);
 
         $positionalTypes = [];
-        for ($i = 1; $i <= $repeat; $i++) {
-            $positionalTypes = array_merge($positionalTypes, $types);
+        for ($i = 0; $i < $repeat; $i++) {
+            foreach ($types as $type) {
+                $positionalTypes[] = $type;
+            }
         }
 
         return $positionalTypes;
