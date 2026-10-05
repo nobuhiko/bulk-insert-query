@@ -6,6 +6,7 @@
 namespace nobuhiko\BulkInsertQuery;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Schema\Identifier;
 
 /**
@@ -91,7 +92,7 @@ class BulkInsertQuery
             }
         }
 
-        $this->connection->executeQuery($sql, $parameters, $this->getPositionalTypes());
+        $this->connection->executeStatement($sql, $parameters, $this->getPositionalTypes());
 
         // not postgres
         //$this->lastInsertId = $this->connection->lastInsertId();
@@ -139,7 +140,8 @@ class BulkInsertQuery
         $placeholders = implode(', ', array_fill(0, count($this->valueSets), $singlePlaceholder));
 
         // fixme integrity constraint violation 1062 duplicate entry for key 対策
-        if ($platform->getName() == 'mysql') {
+        // AbstractPlatform::getName() は DBAL 4 で削除されたため instanceof で判定する
+        if ($platform instanceof AbstractMySQLPlatform) {
             $query = 'REPLACE INTO %s %s VALUES %s;';
         } else {
             $query = 'INSERT INTO %s %s VALUES %s;';
